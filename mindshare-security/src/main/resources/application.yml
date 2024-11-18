@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: mindshare-security
+
+jwt:
+  secret-key: ms-secret-key # secret key
+  at-exp-sec: 86400 # access token expiration (seconds) - 1 days
+  rt-exp-sec: 1209600 # refresh token expiration (seconds) - 14 days

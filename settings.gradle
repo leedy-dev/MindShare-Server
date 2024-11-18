@@ -1,0 +1,4 @@
+rootProject.name = 'mindshare-server'
+
+include 'mindshare-core'
+include 'mindshare-security'
