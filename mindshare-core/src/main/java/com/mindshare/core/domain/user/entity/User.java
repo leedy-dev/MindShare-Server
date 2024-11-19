@@ -29,7 +29,8 @@ import java.util.Collection;
                 @UniqueConstraint(columnNames = {"uid"})
         }
 )
-@DiscriminatorColumn(name = "DTYPE")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "dtype")
 public class User extends BaseCUDEntity implements UserDetails {
 
     @Id
@@ -40,8 +41,8 @@ public class User extends BaseCUDEntity implements UserDetails {
     private String dtype;
 
     @NotNull
-    @Size(min = 5, max = 30)
-    @Column
+    @Size(max = 30)
+    @Column(unique = true)
     private String uid;
 
     @NotNull
@@ -49,9 +50,6 @@ public class User extends BaseCUDEntity implements UserDetails {
     @Convert(converter = BCryptoConverter.class)
     @Column
     private String password;
-
-    @Column(columnDefinition = "integer default 0")
-    private Integer loginAttemptCount = 0;
 
     @Column(columnDefinition = "timestamp default current_timestamp")
     private LocalDateTime lastLoginDateTime;

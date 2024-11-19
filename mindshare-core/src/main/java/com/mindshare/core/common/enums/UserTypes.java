@@ -2,7 +2,7 @@ package com.mindshare.core.common.enums;
 
 public enum UserTypes {
 
-    USER("USER"),
+    MEMBER("MEMBER"),
     ADMIN("ADMIN");
 
     private final String value;

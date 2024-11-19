@@ -25,12 +25,12 @@ public class UserInfo {
     private final Long id = 0L;
 
     @NotNull
-    @Size(min = 2, max = 30)
+    @Size(max = 30)
     @Column
     private String name;
 
     @NotNull
-    @Size(min = 5, max = 200)
+    @Size(max = 200)
     @Column
     private String email;
 
