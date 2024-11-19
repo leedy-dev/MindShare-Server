@@ -1,48 +1,48 @@
 package com.mindshare.security.common.provider;
 
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import com.mindshare.security.common.properties.AuthProperties;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
+import java.util.Base64;
 import java.util.Date;
 
 @Component
+@RequiredArgsConstructor
 public class JwtTokenProvider {
 
-    @Value("${jwt.ms-secret-key}")
-    private String SECRET_KEY;
-
-    @Value("${jwt.at-exp-sec}")
-    private long AT_EXP_SEC;
-
-    @Value("${jwt.rt-exp-sec}")
-    private long RT_EXP_SEC;
+    private final AuthProperties authProperties;
 
     private Key key;
 
     @PostConstruct
     protected void init() {
-        this.key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
+        byte[] keyBytes = Base64.getDecoder().decode(authProperties.getSECRET_KEY());
+        this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
     // Access Token 생성
     public String generateAccessToken(String username) {
-        return generateToken(username, AT_EXP_SEC * 1000);
+        long validity = authProperties.getAT_EXP_SEC() * 1000;
+        Date now = new Date();
+
+        return Jwts.builder()
+                .setSubject(username)
+                .setIssuedAt(now)
+                .setExpiration(new Date(now.getTime() + validity))
+                .signWith(key, SignatureAlgorithm.HS256)
+                .compact();
     }
 
     // Refresh Token 생성
     public String generateRefreshToken(String username) {
-        return generateToken(username, RT_EXP_SEC * 1000);
-    }
-
-    // 토큰 생성
-    private String generateToken(String username, long validity) {
+        long validity = authProperties.getRT_EXP_SEC() * 1000;
         Date now = new Date();
+
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(now)
@@ -66,7 +66,7 @@ public class JwtTokenProvider {
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
             return true;
-        } catch (JwtException | IllegalArgumentException e) {
+        } catch (ExpiredJwtException | MalformedJwtException | UnsupportedJwtException | IllegalArgumentException e) {
             return false;
         }
     }
