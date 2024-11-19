@@ -11,7 +11,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @DynamicUpdate
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString
+@ToString(exclude = "user")
 @EqualsAndHashCode(callSuper = false)
 @Getter
 @Entity
@@ -40,6 +40,8 @@ public class UserInfo {
 
     public void applyUser(User user) {
         this.user = user;
+
+        this.user.applyUserInfo(this);
     }
 
 }

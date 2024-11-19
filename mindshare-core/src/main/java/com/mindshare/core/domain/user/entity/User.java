@@ -1,7 +1,8 @@
 package com.mindshare.core.domain.user.entity;
 
 import com.mindshare.core.common.converters.BCryptoConverter;
-import com.mindshare.core.domain.base.entity.BaseCUDEntity;
+import com.mindshare.core.common.enums.UserTypes;
+import com.mindshare.core.domain.base.entity.BaseCUEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -9,17 +10,18 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @SuperBuilder
 @DynamicUpdate
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString
+@ToString(exclude = "userInfo")
 @EqualsAndHashCode(callSuper = false)
 @Getter
 @Entity
@@ -29,16 +31,16 @@ import java.util.Collection;
                 @UniqueConstraint(columnNames = {"uid"})
         }
 )
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "dtype")
-public class User extends BaseCUDEntity implements UserDetails {
+public class User extends BaseCUEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private final Long id = 0L;
 
-    @Column(insertable = false, updatable = false)
-    private String dtype;
+    @Enumerated(EnumType.STRING)
+    @NotNull
+    @Column(length = 10)
+    private UserTypes userType;
 
     @NotNull
     @Size(max = 30)
@@ -80,7 +82,7 @@ public class User extends BaseCUDEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return new ArrayList<>();
+        return List.of(new SimpleGrantedAuthority("ROLE_" + this.userType.getKey()));
     }
 
     @Override

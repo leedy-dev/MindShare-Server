@@ -1,9 +1,9 @@
 package com.mindshare.core.domain.user.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.mindshare.core.common.enums.UserTypes;
 import com.mindshare.core.common.validate.PatternDefine;
 import com.mindshare.core.domain.base.dto.BaseCUDto;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -15,8 +15,8 @@ import java.time.LocalDateTime;
 @Getter
 public class UserDto extends BaseCUDto {
 
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private String dtype;
+    @NotNull
+    private UserTypes userType;
 
     @NotEmpty
     @Size(max = 30)
@@ -42,13 +42,6 @@ public class UserDto extends BaseCUDto {
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private boolean enabled = true;
-
-    @Getter
-    public static class Join extends UserDto {
-        @NotNull
-        @Valid
-        private UserInfoDto userInfo;
-    }
 
     @Getter
     public static class Response extends UserDto {
