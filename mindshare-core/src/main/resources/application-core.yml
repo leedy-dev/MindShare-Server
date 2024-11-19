@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: mindshare-core
+
+  # h2 tcp db 사용
+  datasource:
+    url: jdbc:h2:tcp://localhost:9092/./mindshare-db
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: mindshare
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+
+jwt:
+  secret-key: N8sCwRiGsi24Lo8ov4SSYH5x2Sq/hDqR6Jrpnf6OGtU= # secret key
+  at-exp-sec: 900 # access token expiration (seconds) - 15 minutes
+  rt-exp-sec: 604800 # refresh token expiration (seconds) - 7 days

@@ -1,6 +1,6 @@
-package com.mindshare.security.common.provider;
+package com.mindshare.core.common.provider;
 
-import com.mindshare.security.common.properties.AuthProperties;
+import com.mindshare.core.common.properties.AuthProperties;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
@@ -21,13 +21,13 @@ public class JwtTokenProvider {
 
     @PostConstruct
     protected void init() {
-        byte[] keyBytes = Base64.getDecoder().decode(authProperties.getSECRET_KEY());
+        byte[] keyBytes = Base64.getDecoder().decode(authProperties.getSecretKey());
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
 
     // Access Token 생성
     public String generateAccessToken(String username) {
-        long validity = authProperties.getAT_EXP_SEC() * 1000;
+        long validity = authProperties.getAtExpSec() * 1000;
         Date now = new Date();
 
         return Jwts.builder()
@@ -40,7 +40,7 @@ public class JwtTokenProvider {
 
     // Refresh Token 생성
     public String generateRefreshToken(String username) {
-        long validity = authProperties.getRT_EXP_SEC() * 1000;
+        long validity = authProperties.getRtExpSec() * 1000;
         Date now = new Date();
 
         return Jwts.builder()

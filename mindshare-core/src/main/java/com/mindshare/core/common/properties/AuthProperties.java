@@ -1,4 +1,4 @@
-package com.mindshare.security.common.properties;
+package com.mindshare.core.common.properties;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -11,12 +11,12 @@ import org.springframework.stereotype.Component;
 public class AuthProperties {
 
     @Value("${jwt.secret-key}")
-    private String SECRET_KEY;
+    private String secretKey;
 
     @Value("${jwt.at-exp-sec}")
-    private long AT_EXP_SEC;
+    private long atExpSec;
 
     @Value("${jwt.rt-exp-sec}")
-    private long RT_EXP_SEC;
+    private long rtExpSec;
 
 }

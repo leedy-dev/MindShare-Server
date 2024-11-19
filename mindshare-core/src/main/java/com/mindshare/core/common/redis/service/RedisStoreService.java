@@ -1,4 +1,4 @@
-package com.mindshare.security.common.redis.service;
+package com.mindshare.core.common.redis.service;
 
 public interface RedisStoreService {
 

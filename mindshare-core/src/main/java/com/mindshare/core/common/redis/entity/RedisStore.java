@@ -1,4 +1,4 @@
-package com.mindshare.security.common.redis.entity;
+package com.mindshare.core.common.redis.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

@@ -1,6 +1,6 @@
-package com.mindshare.security.common.filter;
+package com.mindshare.core.common.filter;
 
-import com.mindshare.security.common.provider.JwtTokenProvider;
+import com.mindshare.core.common.provider.JwtTokenProvider;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

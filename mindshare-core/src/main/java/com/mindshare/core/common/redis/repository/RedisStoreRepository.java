@@ -1,6 +1,6 @@
-package com.mindshare.security.common.redis.repository;
+package com.mindshare.core.common.redis.repository;
 
-import com.mindshare.security.common.redis.entity.RedisStore;
+import com.mindshare.core.common.redis.entity.RedisStore;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDateTime;
