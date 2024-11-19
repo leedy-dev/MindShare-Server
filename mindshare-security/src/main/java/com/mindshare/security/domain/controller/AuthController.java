@@ -23,7 +23,7 @@ public class AuthController {
     private final CookieComponent cookieComponent;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(
+    public ResponseEntity<AuthDto.Token> login(
             @Validated @RequestBody AuthDto.Login authDto,
             HttpServletResponse response,
             BindingResult bindingResult) {
@@ -33,7 +33,7 @@ public class AuthController {
         // set cookie
         cookieComponent.setCookieRefreshToken(token.getRefreshToken(), response);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(token, HttpStatus.OK);
     }
 
 }

@@ -1,6 +1,6 @@
 package com.mindshare.security.common.component;
 
-import com.mindshare.security.common.properties.AuthProperties;
+import com.mindshare.core.common.properties.AuthProperties;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -27,7 +27,7 @@ public class CookieComponent {
         refreshTokenCookie.setHttpOnly(true);
         refreshTokenCookie.setSecure(true);
         refreshTokenCookie.setPath("/");
-        refreshTokenCookie.setMaxAge((int) authProperties.getRT_EXP_SEC());
+        refreshTokenCookie.setMaxAge((int) authProperties.getRtExpSec());
 
         // add cookie
         response.addCookie(refreshTokenCookie);

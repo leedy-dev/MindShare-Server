@@ -1,8 +1,8 @@
 package com.mindshare.security.domain.service.impl;
 
-import com.mindshare.security.common.properties.AuthProperties;
-import com.mindshare.security.common.provider.JwtTokenProvider;
-import com.mindshare.security.common.redis.service.RedisStoreService;
+import com.mindshare.core.common.properties.AuthProperties;
+import com.mindshare.core.common.provider.JwtTokenProvider;
+import com.mindshare.core.common.redis.service.RedisStoreService;
 import com.mindshare.security.domain.service.AuthService;
 import com.mindshare.security.domain.service.dto.AuthDto;
 import lombok.RequiredArgsConstructor;
@@ -36,7 +36,7 @@ public class AuthServiceImpl implements AuthService {
 
         // redis에 저장
         // TODO: 비동기로 실행
-        redisStoreService.save(uid, refreshToken, authProperties.getRT_EXP_SEC());
+        redisStoreService.save(uid, refreshToken, authProperties.getRtExpSec());
 
         return AuthDto.Token.builder()
                 .accessToken(accessToken)
