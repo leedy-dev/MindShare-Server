@@ -39,4 +39,8 @@ public class Board extends BaseCUEntity {
     @Column(columnDefinition = "integer default 0")
     private Integer viewCount = 0;
 
+    public void incrementViewCount() {
+        this.viewCount++;
+    }
+
 }

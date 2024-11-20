@@ -3,6 +3,7 @@ package com.mindshare.core.common.redis.service.impl;
 import com.mindshare.core.common.redis.entity.RedisStore;
 import com.mindshare.core.common.redis.repository.RedisStoreRepository;
 import com.mindshare.core.common.redis.service.RedisStoreService;
+import com.mindshare.core.common.utils.CommonObjectUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,22 @@ public class RedisStoreServiceImpl implements RedisStoreService {
 
         // save
         redisStoreRepository.save(redisStore);
+    }
+
+    @Override
+    @Transactional
+    public boolean saveIfAbsent(String key, String value, long ttlSec) {
+        if (CommonObjectUtils.isNull(get(key))) {
+            save(key, value, ttlSec);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean hasKey(String key) {
+        return redisStoreRepository.existsByRedisKeyAndExpiresAtAfter(key, LocalDateTime.now());
     }
 
     @Override
