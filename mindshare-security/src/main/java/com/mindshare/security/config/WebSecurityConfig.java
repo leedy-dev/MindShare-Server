@@ -1,28 +1,39 @@
 package com.mindshare.security.config;
 
+import com.mindshare.core.config.SecurityConfig;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-@Order(1)
+@RequiredArgsConstructor
 public class WebSecurityConfig {
+
+    private final SecurityConfig securityConfig;
+
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        securityConfig.configureCommonSecurity(http);
+        // setting
         http
-                .securityMatcher("/api/auth/**")
+                // auth
                 .authorizeHttpRequests(request ->
                         request
-                                // auth
-                                .requestMatchers("/login")
+                                // h2 db
+                                .requestMatchers("/h2-console/**")
                                 .permitAll()
 
-                                .anyRequest()
-                                .authenticated()
-                );
+                                // swagger
+                                .requestMatchers("/swagger-ui/**", "/v3/api-docs/**")
+                                .permitAll()
 
+                                // auth
+                                .requestMatchers("/api/auth/login")
+                                .permitAll()
+                );
         return http.build();
     }
+
 }

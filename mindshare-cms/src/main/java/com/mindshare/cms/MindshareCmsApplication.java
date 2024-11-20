@@ -9,8 +9,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableJpaRepositories(basePackageClasses = { MindshareCoreBasePackage.class, MindshareCmsBasePackage.class })
-@ComponentScan(basePackageClasses = { MindshareCoreBasePackage.class, MindshareCmsBasePackage.class })
 @EntityScan(basePackageClasses = { MindshareCoreBasePackage.class, MindshareCmsBasePackage.class })
+@ComponentScan(basePackageClasses = { MindshareCoreBasePackage.class, MindshareCmsBasePackage.class })
 public class MindshareCmsApplication {
 
     public static void main(String[] args) {

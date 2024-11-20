@@ -16,11 +16,11 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final AmsUserRepository userRepository;
+    private final AmsUserRepository amsUserRepository;
     private final ModelMapper modelMapper;
 
     private User getUserEntityById(Long id) {
-        return userRepository.findById(id)
+        return amsUserRepository.findById(id)
                 .orElseThrow(() -> new ApiException("User Not Found"));
     }
 
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
         userInfo.applyUser(user);
 
         // save
-        user = userRepository.save(user);
+        user = amsUserRepository.save(user);
 
         // response
         return modelMapper.map(user, UserDto.Response.class);
@@ -71,7 +71,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public Long deleteUserById(Long id) {
-        userRepository.deleteById(id);
+        amsUserRepository.deleteById(id);
         return id;
     }
 }
