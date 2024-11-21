@@ -5,6 +5,7 @@ import com.mindshare.core.config.SecurityConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -19,12 +20,14 @@ public class AmsSecurityConfig {
         securityConfig.configureCommonSecurity(http);
 
         http
-                .securityMatcher("/ams/**")
                 .authorizeHttpRequests(request ->
                         request
+                                .requestMatchers(HttpMethod.POST, "/ams/api/user")
+                                .permitAll()
+
                                 // user
-                                .requestMatchers("/api/user/**")
-                                .hasAnyAuthority(UserTypes.MEMBER.getKey(), UserTypes.ADMIN.getKey())
+                                .requestMatchers("/ams/api/user/**")
+                                .hasAnyAuthority(UserTypes.ADMIN.getKey())
 
                                 // any request
                                 .anyRequest()

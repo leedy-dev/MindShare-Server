@@ -18,11 +18,10 @@ public class CmsSecurityConfig {
     public SecurityFilterChain cmsFilterChain(HttpSecurity http) throws Exception {
         securityConfig.configureCommonSecurity(http);
         http
-                .securityMatcher("/cms/**")
                 .authorizeHttpRequests(request ->
                         request 
                                 // board
-                                .requestMatchers("/api/board/**")
+                                .requestMatchers("/cms/api/board/**")
                                 .hasAnyAuthority(UserTypes.MEMBER.getKey(), UserTypes.ADMIN.getKey())
 
                                 // any request

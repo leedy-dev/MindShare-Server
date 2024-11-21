@@ -53,9 +53,6 @@ public class User extends BaseCUEntity implements UserDetails {
     @Column
     private String password;
 
-    @Column(columnDefinition = "timestamp default current_timestamp")
-    private LocalDateTime lastLoginDateTime;
-
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserInfo userInfo;
 
@@ -82,7 +79,7 @@ public class User extends BaseCUEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_" + this.userType.getKey()));
+        return List.of(new SimpleGrantedAuthority(this.userType.getKey()));
     }
 
     @Override
