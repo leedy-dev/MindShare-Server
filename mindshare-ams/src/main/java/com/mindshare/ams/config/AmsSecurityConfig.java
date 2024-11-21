@@ -25,13 +25,9 @@ public class AmsSecurityConfig {
                                 .requestMatchers(HttpMethod.POST, "/ams/api/user")
                                 .permitAll()
 
-                                // user
-                                .requestMatchers("/ams/api/user/**")
-                                .hasAnyAuthority(UserTypes.ADMIN.getKey())
-
                                 // any request
                                 .anyRequest()
-                                .authenticated()
+                                .hasAnyAuthority(UserTypes.ADMIN.getKey())
                 );
 
         return http.build();
