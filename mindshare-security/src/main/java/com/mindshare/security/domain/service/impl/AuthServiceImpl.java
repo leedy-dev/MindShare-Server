@@ -9,8 +9,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -34,11 +37,14 @@ public class AuthServiceImpl implements AuthService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         // 토큰 생성
-        String accessToken = jwtTokenProvider.generateAccessToken(uid);
+        String accessToken = jwtTokenProvider.generateAccessToken(
+                uid,
+                authentication.getAuthorities().stream()
+                        .map(GrantedAuthority::getAuthority)
+                        .collect(Collectors.toList()));
         String refreshToken = jwtTokenProvider.generateRefreshToken(uid);
 
         // redis에 저장
-        // TODO: 비동기로 실행
         redisStoreService.save(uid, refreshToken, authProperties.getRtExpSec());
 
         return AuthDto.Token.builder()

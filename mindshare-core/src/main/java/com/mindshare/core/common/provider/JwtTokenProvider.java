@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -26,12 +27,15 @@ public class JwtTokenProvider {
     }
 
     // Access Token 생성
-    public String generateAccessToken(String username) {
+    public String generateAccessToken(String username, List<String> roles) {
         long validity = authProperties.getAtExpSec() * 1000;
         Date now = new Date();
 
+        Claims claims = Jwts.claims().setSubject(username);
+        claims.put("roles", roles);
+
         return Jwts.builder()
-                .setSubject(username)
+                .setClaims(claims)
                 .setIssuedAt(now)
                 .setExpiration(new Date(now.getTime() + validity))
                 .signWith(key, SignatureAlgorithm.HS256)
@@ -68,6 +72,15 @@ public class JwtTokenProvider {
             return true;
         } catch (ExpiredJwtException | MalformedJwtException | UnsupportedJwtException | IllegalArgumentException e) {
             return false;
+        }
+    }
+
+    // 토큰 유효성 검증
+    public Claims resolveToken(String token) {
+        try {
+            return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
+        } catch (ExpiredJwtException | MalformedJwtException | UnsupportedJwtException | IllegalArgumentException e) {
+            return null;
         }
     }
 

@@ -1,5 +1,6 @@
 package com.mindshare.ams.domain.user.service.impl;
 
+import com.mindshare.ams.domain.user.repository.AmsUserQuerydslRepository;
 import com.mindshare.ams.domain.user.repository.AmsUserRepository;
 import com.mindshare.ams.domain.user.service.UserService;
 import com.mindshare.ams.domain.user.service.dto.UserRequestDto;
@@ -16,11 +17,12 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
+    private final AmsUserQuerydslRepository amsUserQuerydslRepository;
     private final AmsUserRepository amsUserRepository;
     private final ModelMapper modelMapper;
 
     private User getUserEntityById(Long id) {
-        return amsUserRepository.findById(id)
+        return amsUserQuerydslRepository.findById(id)
                 .orElseThrow(() -> new ApiException("User Not Found"));
     }
 

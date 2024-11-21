@@ -24,8 +24,8 @@ public class BoardController {
     }
 
     @GetMapping("")
-    public ResponseEntity<Page<BoardDto.Response>> doGetBoardPage(Pageable pageable) {
-        return new ResponseEntity<>(boardService.getBoardList(pageable), HttpStatus.OK);
+    public ResponseEntity<Page<BoardDto.Response>> doGetBoardPage(BoardDto.Search search, Pageable pageable) {
+        return new ResponseEntity<>(boardService.getBoardList(search, pageable), HttpStatus.OK);
     }
 
     @PostMapping("")

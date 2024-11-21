@@ -1,6 +1,7 @@
 package com.mindshare.cms.domain.board.service.impl;
 
 import com.mindshare.cms.domain.board.entity.Board;
+import com.mindshare.cms.domain.board.repository.BoardQuerydslRepository;
 import com.mindshare.cms.domain.board.repository.BoardRepository;
 import com.mindshare.cms.domain.board.service.BoardService;
 import com.mindshare.cms.domain.board.service.dto.BoardDto;
@@ -24,12 +25,15 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class BoardServiceImpl implements BoardService {
 
     public static final long REDIS_VIEW_TTL = Duration.ofHours(1).getSeconds();
     public static final long REDIS_LOCK_TTL = Duration.ofSeconds(10).getSeconds();
 
+    private final BoardQuerydslRepository boardQuerydslRepository;
     private final BoardRepository boardRepository;
+
     private final ModelMapper modelMapper;
     private final LoginUserComponent loginUserComponent;
     private final RedisStoreService redisStoreService;
@@ -39,7 +43,7 @@ public class BoardServiceImpl implements BoardService {
     private final BlockingQueue<Long> lockWaitingQueue = new LinkedBlockingQueue<>();
 
     private Board getBoardEntityById(Long id) {
-        return boardRepository.findById(id)
+        return boardQuerydslRepository.findById(id)
                 .orElseThrow(() -> new ApiException("Board Not Found"));
     }
 
@@ -55,8 +59,8 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public Page<BoardDto.Response> getBoardList(Pageable pageable) {
-        Page<Board> boardPage = boardRepository.findAll(pageable);
+    public Page<BoardDto.Response> getBoardList(BoardDto.Search search, Pageable pageable) {
+        Page<Board> boardPage = boardQuerydslRepository.findWithPaging(search, pageable);
 
         return new PageImpl<>(boardPage.getContent().stream()
                 .map(board -> modelMapper.map(board, BoardDto.Response.class))

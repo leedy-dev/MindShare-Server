@@ -5,6 +5,7 @@ import com.mindshare.core.domain.base.dto.BaseCUDto;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 public class BoardDto extends BaseCUDto {
@@ -28,6 +29,12 @@ public class BoardDto extends BaseCUDto {
     @Getter
     public static class Response extends BoardDto {
         private Long id;
+    }
+
+    @Getter
+    @Setter
+    public static class Search {
+        private String title;
     }
 
 }
