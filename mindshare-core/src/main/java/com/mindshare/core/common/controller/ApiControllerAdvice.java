@@ -17,6 +17,16 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class ApiControllerAdvice {
 
+    @ExceptionHandler(value = Exception.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    protected ResponseEntity<Map<String, String>> handleException(Exception e) {
+        Map<String, String> errMap = new HashMap<>();
+        errMap.put("code", "400");
+        errMap.put("detail", e.getMessage());
+
+        return new ResponseEntity<>(errMap, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(value = ApiException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     protected ResponseEntity<Map<String, String>> handleApiException(ApiException e) {
