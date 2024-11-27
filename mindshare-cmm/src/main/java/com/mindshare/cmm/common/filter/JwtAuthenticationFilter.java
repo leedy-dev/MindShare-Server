@@ -1,6 +1,6 @@
-package com.mindshare.core.common.filter;
+package com.mindshare.cmm.common.filter;
 
-import com.mindshare.core.common.provider.JwtTokenProvider;
+import com.mindshare.cmm.common.provider.JwtTokenProvider;
 import com.mindshare.core.common.utils.CommonObjectUtils;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;

@@ -1,4 +1,4 @@
-package com.mindshare.core.common.properties;
+package com.mindshare.cmm.common.properties;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -205,7 +205,7 @@ database
 
 
 3. refresh token과 lock key 관리를 위해 redis가 필요하다고 생각하여 redis처럼 동작하는 컴포넌트를 구성하였습니다.
-   - package: com.mindshare.core.common.redis
+   - package: com.mindshare.cmm.common.redis
    - key-value 형식으로 데이터를 저장하고 만료시간을 부여하였습니다.
    - 1시간마다 스케줄러로 만료된 데이터는 삭제하도록 하였습니다.
    - get 요청 시 만료된 데이터일 경우 삭제하도록 하였습니다.

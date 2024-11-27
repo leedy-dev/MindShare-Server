@@ -1,6 +1,6 @@
-package com.mindshare.core.config;
+package com.mindshare.cmm.config;
 
-import com.mindshare.core.common.filter.JwtAuthenticationFilter;
+import com.mindshare.cmm.common.filter.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

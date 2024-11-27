@@ -1,6 +1,6 @@
-package com.mindshare.core.common.provider;
+package com.mindshare.cmm.common.provider;
 
-import com.mindshare.core.common.properties.AuthProperties;
+import com.mindshare.cmm.common.properties.AuthProperties;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;

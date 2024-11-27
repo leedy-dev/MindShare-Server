@@ -1,6 +1,6 @@
 package com.mindshare.security.config;
 
-import com.mindshare.core.config.SecurityConfig;
+import com.mindshare.cmm.config.SecurityConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

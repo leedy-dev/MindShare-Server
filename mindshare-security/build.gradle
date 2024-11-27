@@ -1,14 +1,6 @@
 version = '1.0.0'
 
 dependencies {
-    // mind share
-    implementation project(':mindshare-core') // core 모듈 가져오기
-
-    // spring
-    implementation 'org.springframework.boot:spring-boot-starter'
-
-    // swagger
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
 }
 
 tasks.named('test') {

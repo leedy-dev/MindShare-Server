@@ -1,4 +1,4 @@
-package com.mindshare.core.common.components;
+package com.mindshare.cmm.common.components;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

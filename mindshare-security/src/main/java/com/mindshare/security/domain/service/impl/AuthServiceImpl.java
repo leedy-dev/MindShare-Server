@@ -1,8 +1,8 @@
 package com.mindshare.security.domain.service.impl;
 
-import com.mindshare.core.common.properties.AuthProperties;
-import com.mindshare.core.common.provider.JwtTokenProvider;
-import com.mindshare.core.common.redis.service.RedisStoreService;
+import com.mindshare.cmm.common.properties.AuthProperties;
+import com.mindshare.cmm.common.provider.JwtTokenProvider;
+import com.mindshare.cmm.common.redis.service.RedisStoreService;
 import com.mindshare.security.domain.service.AuthService;
 import com.mindshare.security.domain.service.dto.AuthDto;
 import lombok.RequiredArgsConstructor;

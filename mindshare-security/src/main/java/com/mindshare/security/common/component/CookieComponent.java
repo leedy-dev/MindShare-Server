@@ -1,6 +1,6 @@
 package com.mindshare.security.common.component;
 
-import com.mindshare.core.common.properties.AuthProperties;
+import com.mindshare.cmm.common.properties.AuthProperties;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

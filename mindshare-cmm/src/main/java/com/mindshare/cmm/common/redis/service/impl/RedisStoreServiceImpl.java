@@ -1,8 +1,8 @@
-package com.mindshare.core.common.redis.service.impl;
+package com.mindshare.cmm.common.redis.service.impl;
 
-import com.mindshare.core.common.redis.entity.RedisStore;
-import com.mindshare.core.common.redis.repository.RedisStoreRepository;
-import com.mindshare.core.common.redis.service.RedisStoreService;
+import com.mindshare.cmm.common.redis.entity.RedisStore;
+import com.mindshare.cmm.common.redis.repository.RedisStoreRepository;
+import com.mindshare.cmm.common.redis.service.RedisStoreService;
 import com.mindshare.core.common.utils.CommonObjectUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;

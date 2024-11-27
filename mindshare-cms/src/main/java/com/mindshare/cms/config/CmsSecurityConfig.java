@@ -1,7 +1,7 @@
 package com.mindshare.cms.config;
 
+import com.mindshare.cmm.config.SecurityConfig;
 import com.mindshare.core.common.enums.UserTypes;
-import com.mindshare.core.config.SecurityConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +19,7 @@ public class CmsSecurityConfig {
         securityConfig.configureCommonSecurity(http);
         http
                 .authorizeHttpRequests(request ->
-                        request 
+                        request
                                 // board
                                 .requestMatchers("/cms/api/board/**")
                                 .hasAnyAuthority(UserTypes.MEMBER.getKey(), UserTypes.ADMIN.getKey())

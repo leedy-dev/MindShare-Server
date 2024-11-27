@@ -1,6 +1,6 @@
-package com.mindshare.core.common.components;
+package com.mindshare.cmm.common.components;
 
-import com.mindshare.core.common.redis.service.RedisStoreService;
+import com.mindshare.cmm.common.redis.service.RedisStoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
