@@ -1,7 +1,7 @@
 package com.mindshare.cmm.domain.user.entity;
 
-import com.mindshare.core.common.converters.BCryptoConverter;
 import com.mindshare.cmm.common.enums.UserTypes;
+import com.mindshare.core.common.converters.BCryptoConverter;
 import com.mindshare.core.domain.base.entity.BaseCUDEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -27,7 +27,7 @@ import java.util.List;
 @Table(
         name = "users",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {"uid"})
+                @UniqueConstraint(columnNames = {"uid"}, name = "uk_user_uid")
         }
 )
 public class User extends BaseCUDEntity implements UserDetails {
@@ -113,10 +113,6 @@ public class User extends BaseCUDEntity implements UserDetails {
 
     public void applyUserInfo(UserInfo userInfo) {
         this.userInfo = userInfo;
-    }
-
-    public void softDelete() {
-
     }
 
 }

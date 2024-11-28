@@ -1,6 +1,8 @@
 package com.mindshare.cmm.config;
 
 import com.mindshare.cmm.common.filter.JwtAuthenticationFilter;
+import com.mindshare.cmm.common.handler.AuthEntryPoint;
+import com.mindshare.cmm.common.handler.DeniedHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -55,7 +57,11 @@ public class SecurityConfig {
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .sessionManagement(config -> config.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling(config ->
+                        config
+                                .authenticationEntryPoint(new AuthEntryPoint())
+                                .accessDeniedHandler(new DeniedHandler()));
     }
 
 

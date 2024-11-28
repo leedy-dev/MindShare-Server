@@ -1,14 +1,15 @@
 package com.mindshare.cms.domain.board.service.impl;
 
+import com.mindshare.cmm.common.components.LoginUserComponent;
+import com.mindshare.cmm.common.components.RedisLockComponent;
+import com.mindshare.cmm.common.exception.ApiException;
+import com.mindshare.cmm.common.redis.service.RedisStoreService;
+import com.mindshare.cms.common.exception.CmsErrorMessage;
 import com.mindshare.cms.domain.board.entity.Board;
 import com.mindshare.cms.domain.board.repository.BoardQuerydslRepository;
 import com.mindshare.cms.domain.board.repository.BoardRepository;
 import com.mindshare.cms.domain.board.service.BoardService;
 import com.mindshare.cms.domain.board.service.dto.BoardDto;
-import com.mindshare.cmm.common.components.LoginUserComponent;
-import com.mindshare.cmm.common.components.RedisLockComponent;
-import com.mindshare.core.common.exception.ApiException;
-import com.mindshare.cmm.common.redis.service.RedisStoreService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -44,7 +45,7 @@ public class BoardServiceImpl implements BoardService {
 
     private Board getBoardEntityById(Long id) {
         return boardQuerydslRepository.findById(id)
-                .orElseThrow(() -> new ApiException("Board Not Found"));
+                .orElseThrow(() -> new ApiException(CmsErrorMessage.BOARD_NOT_FOUND));
     }
 
     @Override

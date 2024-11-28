@@ -1,13 +1,15 @@
 package com.mindshare.ams.domain.user.service.impl;
 
-import com.mindshare.ams.domain.user.repository.AmsUserQuerydslRepository;
+import com.mindshare.ams.domain.user.repository.UserQuerydslRepository;
 import com.mindshare.ams.domain.user.service.UserService;
 import com.mindshare.ams.domain.user.service.dto.UserRequestDto;
+import com.mindshare.cmm.common.components.LoginUserComponent;
+import com.mindshare.cmm.common.exception.ApiException;
+import com.mindshare.cmm.common.exception.message.ErrorMessage;
 import com.mindshare.cmm.domain.user.entity.User;
 import com.mindshare.cmm.domain.user.entity.UserInfo;
 import com.mindshare.cmm.domain.user.repository.UserRepository;
 import com.mindshare.cmm.domain.user.service.dto.UserDto;
-import com.mindshare.core.common.exception.ApiException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -17,13 +19,14 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final AmsUserQuerydslRepository amsUserQuerydslRepository;
+    private final UserQuerydslRepository userQuerydslRepository;
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
+    private final LoginUserComponent loginUserComponent;
 
     private User getUserEntityById(Long id) {
-        return amsUserQuerydslRepository.findById(id)
-                .orElseThrow(() -> new ApiException("User Not Found"));
+        return userQuerydslRepository.findById(id)
+                .orElseThrow(() -> new ApiException(ErrorMessage.USER_NOT_FOUND));
     }
 
     @Override
@@ -73,7 +76,12 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public Long deleteUserById(Long id) {
-        userRepository.deleteById(id);
+        // get
+        User user = getUserEntityById(id);
+
+        // soft delete
+        user.softDelete(loginUserComponent.getCurrentLoginUser());
+
         return id;
     }
 }

@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
-public class AmsUserQuerydslRepository {
+public class UserQuerydslRepository {
 
     private final JPAQueryFactory jpaQueryFactory;
 
