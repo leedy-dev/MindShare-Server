@@ -1,4 +1,4 @@
-package com.mindshare.core.domain.user.entity;
+package com.mindshare.cmm.domain.user.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

@@ -1,13 +1,13 @@
 package com.mindshare.ams.domain.user.service.impl;
 
 import com.mindshare.ams.domain.user.repository.AmsUserQuerydslRepository;
-import com.mindshare.ams.domain.user.repository.AmsUserRepository;
 import com.mindshare.ams.domain.user.service.UserService;
 import com.mindshare.ams.domain.user.service.dto.UserRequestDto;
+import com.mindshare.cmm.domain.user.entity.User;
+import com.mindshare.cmm.domain.user.entity.UserInfo;
+import com.mindshare.cmm.domain.user.repository.UserRepository;
+import com.mindshare.cmm.domain.user.service.dto.UserDto;
 import com.mindshare.core.common.exception.ApiException;
-import com.mindshare.core.domain.user.dto.UserDto;
-import com.mindshare.core.domain.user.entity.User;
-import com.mindshare.core.domain.user.entity.UserInfo;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserServiceImpl implements UserService {
 
     private final AmsUserQuerydslRepository amsUserQuerydslRepository;
-    private final AmsUserRepository amsUserRepository;
+    private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
     private User getUserEntityById(Long id) {
@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
         userInfo.applyUser(user);
 
         // save
-        user = amsUserRepository.save(user);
+        user = userRepository.save(user);
 
         // response
         return modelMapper.map(user, UserDto.Response.class);
@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public Long deleteUserById(Long id) {
-        amsUserRepository.deleteById(id);
+        userRepository.deleteById(id);
         return id;
     }
 }

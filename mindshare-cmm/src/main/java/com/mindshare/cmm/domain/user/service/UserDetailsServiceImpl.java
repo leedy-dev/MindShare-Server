@@ -1,7 +1,7 @@
-package com.mindshare.core.domain.user.service;
+package com.mindshare.cmm.domain.user.service;
 
-import com.mindshare.core.domain.user.entity.User;
-import com.mindshare.core.domain.user.repository.UserRepository;
+import com.mindshare.cmm.domain.user.entity.User;
+import com.mindshare.cmm.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

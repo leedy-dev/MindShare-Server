@@ -1,9 +1,10 @@
-package com.mindshare.core.common.enums;
+package com.mindshare.cmm.common.enums;
 
 public enum UserTypes {
 
-    MEMBER("MEMBER"),
-    ADMIN("ADMIN");
+    SYSTEM("SYSTEM"),
+    ADMIN("ADMIN"),
+    MEMBER("MEMBER");
 
     private final String value;
 

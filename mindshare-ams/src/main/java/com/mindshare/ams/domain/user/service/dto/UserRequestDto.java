@@ -1,8 +1,8 @@
 package com.mindshare.ams.domain.user.service.dto;
 
-import com.mindshare.core.common.enums.UserTypes;
-import com.mindshare.core.domain.user.dto.UserDto;
-import com.mindshare.core.domain.user.dto.UserInfoDto;
+import com.mindshare.cmm.domain.user.service.dto.UserDto;
+import com.mindshare.cmm.domain.user.service.dto.UserInfoDto;
+import com.mindshare.cmm.common.enums.UserTypes;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;

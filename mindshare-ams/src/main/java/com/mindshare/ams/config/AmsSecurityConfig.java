@@ -1,7 +1,7 @@
 package com.mindshare.ams.config;
 
 import com.mindshare.cmm.config.SecurityConfig;
-import com.mindshare.core.common.enums.UserTypes;
+import com.mindshare.cmm.common.enums.UserTypes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,7 +1,7 @@
-package com.mindshare.core.domain.user.dto;
+package com.mindshare.cmm.domain.user.service.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.mindshare.core.common.enums.UserTypes;
+import com.mindshare.cmm.common.enums.UserTypes;
 import com.mindshare.core.domain.base.dto.BaseCUDto;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;

@@ -1,6 +1,6 @@
-package com.mindshare.core.domain.user.repository;
+package com.mindshare.cmm.domain.user.repository;
 
-import com.mindshare.core.domain.user.entity.User;
+import com.mindshare.cmm.domain.user.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

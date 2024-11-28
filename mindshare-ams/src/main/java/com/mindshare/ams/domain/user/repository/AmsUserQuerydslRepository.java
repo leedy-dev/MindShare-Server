@@ -1,7 +1,7 @@
 package com.mindshare.ams.domain.user.repository;
 
-import com.mindshare.core.domain.user.entity.QUser;
-import com.mindshare.core.domain.user.entity.User;
+import com.mindshare.cmm.domain.user.entity.QUser;
+import com.mindshare.cmm.domain.user.entity.User;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

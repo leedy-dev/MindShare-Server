@@ -1,8 +1,8 @@
-package com.mindshare.core.domain.user.entity;
+package com.mindshare.cmm.domain.user.entity;
 
 import com.mindshare.core.common.converters.BCryptoConverter;
-import com.mindshare.core.common.enums.UserTypes;
-import com.mindshare.core.domain.base.entity.BaseCUEntity;
+import com.mindshare.cmm.common.enums.UserTypes;
+import com.mindshare.core.domain.base.entity.BaseCUDEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -13,7 +13,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -31,7 +30,7 @@ import java.util.List;
                 @UniqueConstraint(columnNames = {"uid"})
         }
 )
-public class User extends BaseCUEntity implements UserDetails {
+public class User extends BaseCUDEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -114,6 +113,10 @@ public class User extends BaseCUEntity implements UserDetails {
 
     public void applyUserInfo(UserInfo userInfo) {
         this.userInfo = userInfo;
+    }
+
+    public void softDelete() {
+
     }
 
 }

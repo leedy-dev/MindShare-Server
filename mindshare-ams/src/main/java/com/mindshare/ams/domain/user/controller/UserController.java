@@ -2,7 +2,7 @@ package com.mindshare.ams.domain.user.controller;
 
 import com.mindshare.ams.domain.user.service.UserService;
 import com.mindshare.ams.domain.user.service.dto.UserRequestDto;
-import com.mindshare.core.domain.user.dto.UserDto;
+import com.mindshare.cmm.domain.user.service.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

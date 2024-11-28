@@ -1,7 +1,7 @@
 package com.mindshare.ams.domain.user.service;
 
 import com.mindshare.ams.domain.user.service.dto.UserRequestDto;
-import com.mindshare.core.domain.user.dto.UserDto;
+import com.mindshare.cmm.domain.user.service.dto.UserDto;
 
 public interface UserService {
 

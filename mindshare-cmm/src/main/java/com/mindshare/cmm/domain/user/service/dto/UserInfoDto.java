@@ -1,4 +1,4 @@
-package com.mindshare.core.domain.user.dto;
+package com.mindshare.cmm.domain.user.service.dto;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
