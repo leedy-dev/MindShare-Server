@@ -5,7 +5,6 @@ import com.mindshare.cmm.common.redis.repository.RedisStoreRepository;
 import com.mindshare.cmm.common.redis.service.RedisStoreService;
 import com.mindshare.core.common.utils.CommonObjectUtils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -76,12 +75,14 @@ public class RedisStoreServiceImpl implements RedisStoreService {
     }
 
     @Override
+    @Transactional
     public void delete(String key) {
         redisStoreRepository.deleteById(key);
     }
 
-    @Scheduled(cron = "0 0 * * * *")
-    private void cleanExpiredKey() {
+    @Override
+    @Transactional
+    public void cleanExpiredKey() {
         redisStoreRepository.deleteAllByExpiresAtBefore(LocalDateTime.now());
     }
 

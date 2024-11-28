@@ -12,4 +12,6 @@ public interface RedisStoreService {
 
     void delete(String key);
 
+    void cleanExpiredKey();
+
 }
